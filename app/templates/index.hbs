@@ -1,0 +1,37 @@
+<h1>Post</h1>
+<hr />
+
+{{#each model as |post|}}
+	<div>
+		
+		{{#if post.isEditing}}
+			{{input type='text' value=post.title}}<br />
+			{{textarea value=post.body}}<br />
+			<input type='button' value='save' {{action 'savePost' post}} />
+
+		{{else}}
+
+
+			<h3>{{{post.title}}}</h3>
+			<p>{{{post.body}}}</p>
+			<input type='button' value='edit' {{action 'editPost' post}} />
+		{{/if}}
+		
+		<input type='button' value='delete' {{action 'deletePost' post}} />
+	</div>
+	
+	<hr />
+{{else}}
+	<div>
+		<h3>No posts found</h3>
+	</div>
+{{/each}}
+
+<form>
+
+	{{input type='text' placeholder="title" value=newPostTitle}}<br/>
+	
+	{{textarea placeholder='Post Body' value=newPostBody}}<br/>
+
+	<input type="submit" value="submit" {{action 'addNewPost'}} />
+</form>
